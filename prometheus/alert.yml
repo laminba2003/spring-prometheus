@@ -1,8 +1,8 @@
 groups:
-- name: example
+- name: default
   rules:
 
-  # Alert for any instance that is unreachable for >2 minutes.
+  # Alert for any instance that is unreachable for > 2 minutes.
   - alert: service_down
     expr: up == 0
     for: 2m
@@ -13,10 +13,10 @@ groups:
       description: "{{ $labels.instance }} of job {{ $labels.job }} has been down for more than 2 minutes."
 
   - alert: high_load
-    expr: node_load1 > 0.5
-    for: 2m
+    expr: system_cpu_usage > 0.8
+    for: 1m
     labels:
-      severity: page
+      severity: critical
     annotations:
-      summary: "Instance {{ $labels.instance }} under high load"
-      description: "{{ $labels.instance }} of job {{ $labels.job }} is under high load."
+      summary: "Instance {{ $labels.instance }} is under high load"
+      description: "{{ $labels.instance }} has an average CPU idle (current value: {{ $value }}s)."
