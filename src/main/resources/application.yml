@@ -1,0 +1,27 @@
+server:
+    port : 9090
+spring:
+    application:
+        name: spring-promotheus
+    datasource:
+        url: "jdbc:mysql://localhost:3307/spring-training?allowPublicKeyRetrieval=true&autoReconnect=true&useSSL=false"
+        username: user
+        password: user
+    jpa:
+        database-platform: org.hibernate.dialect.MySQL8Dialect
+        open-in-view: false
+        hibernate:
+            use-new-id-generator-mappings: false
+    liquibase:
+        change-log: classpath:/db/changelog/changelog-master.xml
+info:
+    application:
+        name: Spring Prometheus
+management:
+    endpoints:
+        web:
+            exposure:
+                include: health,info,prometheus
+    info:
+        env:
+            enabled: true
