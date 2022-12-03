@@ -1,6 +1,6 @@
 global:
   resolve_timeout: 1m
-  slack_api_url: 'slack webhook'
+  slack_api_url: 'https://hooks.slack.com/services/T04EARW1DB2/B04DM5LP4'
 
 route:
   repeat_interval: 2m
@@ -11,7 +11,7 @@ receivers:
     slack_configs:
       - channel: '#dev'
         send_resolved: true
-        icon_url: https://avatars3.githubusercontent.com/u/3380462
+        icon_url: "https://avatars3.githubusercontent.com/u/3380462"
         title: |-
           [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
           {{- if gt (len .CommonLabels) (len .GroupLabels) -}}

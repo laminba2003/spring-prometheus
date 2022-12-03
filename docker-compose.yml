@@ -14,6 +14,7 @@ services:
       - 3307:3306
     volumes:
       - mysql_data:/var/lib/mysql
+
   prometheus:
     image: prom/prometheus:v2.36.2
     volumes:
@@ -43,9 +44,25 @@ services:
       - '--config.file=/etc/alertmanager/config.yml'
       - '--storage.path=/alertmanager'
 
+  grafana:
+    image: grafana/grafana
+    user: "472"
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    volumes:
+      - grafana_data:/var/lib/grafana
+    env_file:
+      - ./grafana/config.monitoring
+    networks:
+      - promotheus
+    restart: always
+
 volumes:
   mysql_data:
   prometheus_data:
+  grafana_data:
 
 networks:
   promotheus:
