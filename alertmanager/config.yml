@@ -1,6 +1,6 @@
 global:
   resolve_timeout: 1m
-  slack_api_url: 'https://hooks.slack.com/services/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'
+  slack_api_url: 'slack webhook'
 
 route:
   repeat_interval: 2m
